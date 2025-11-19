@@ -48,7 +48,7 @@ Afya-Link is an intelligent health assistant web application that helps you unde
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/afya-link.git
+git clone https://github.com/Feisaladen/afya-link.git
 
 # Navigate to project directory
 cd afya-link
