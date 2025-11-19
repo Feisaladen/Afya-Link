@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afya Link - Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <div class="min-h-screen flex items-center justify-center p-6">
+    <div class="bg-white shadow-2xl rounded-2xl w-full max-w-md p-8">
+
+      <div class="flex justify-center mb-6">
+        <img src="logo.png" alt="Afya Link Logo" class="w-20 h-20 md:w-24 md:h-24 object-contain rounded-3xl shadow-lg border border-gray-200 transition-transform hover:scale-105">
+      </div>
+
+      <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Create Your Account</h2>
+
+      <form id="signupForm" class="space-y-4">
+        <div class="relative">
+          <i class="fas fa-user absolute top-3 left-3 text-gray-400"></i>
+          <input type="text" placeholder="Full Name" name="fullName" class="w-full pl-10 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+        </div>
+        <div class="relative">
+          <i class="fas fa-envelope absolute top-3 left-3 text-gray-400"></i>
+          <input type="email" placeholder="Email" name="email" class="w-full pl-10 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+        </div>
+        <div class="relative">
+          <i class="fas fa-lock absolute top-3 left-3 text-gray-400"></i>
+          <input type="password" placeholder="Password" name="password" class="w-full pl-10 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+        </div>
+
+        <p id="signupMsg" class="text-sm text-red-600 hidden"></p>
+        <button type="submit" class="w-full bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 font-semibold transition shadow-md hover:shadow-lg">Sign Up</button>
+      </form>
+
+      <p class="text-center text-gray-500 mt-4">
+        Already have an account? <a href="login.html" class="text-blue-500 hover:text-blue-700 font-medium">Login</a>
+      </p>
+      <p class="text-xs text-gray-400 italic mt-4 text-center">⚠️ AI guidance in the app does not replace a doctor’s consultation.</p>
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = window.__AFYA_SUPABASE_URL || "YOUR_SUPABASE_URL";
+    const SUPABASE_ANON_KEY = window.__AFYA_SUPABASE_ANON_KEY || "YOUR_SUPABASE_ANON_KEY";
+
+    if (SUPABASE_URL.includes("YOUR_") || SUPABASE_ANON_KEY.includes("YOUR_")) {
+      console.warn("⚠️ Replace the Supabase placeholders with your actual project credentials.");
+    }
+
+    if (!window.supabase || !window.supabase.createClient) {
+      throw new Error("Supabase JS library failed to load. Check the CDN script tag.");
+    }
+
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const signupForm = document.getElementById('signupForm');
+    const signupMsg = document.getElementById('signupMsg');
+
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      signupMsg.classList.add('hidden');
+
+      const fullName = signupForm.fullName.value.trim();
+      const email = signupForm.email.value.trim();
+      const password = signupForm.password.value;
+
+      try {
+        const { error } = await supabaseClient.auth.signUp({
+          email,
+          password,
+          options: { data: { full_name: fullName } }
+        });
+
+        if (error) throw error;
+
+        alert("Signup successful! Please verify your email to continue.");
+        window.location.href = "login.html";
+      } catch (err) {
+        console.error("Signup error:", err);
+        signupMsg.textContent = err.message || "Unexpected error occurred";
+        signupMsg.classList.remove('hidden');
+      }
+    });
+
+    supabaseClient.auth.getSession().then(({ data }) => {
+      if (data.session) window.location.href = "dashboard.html";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afya Link</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    /* 🌈 Animated gradient background */
+    body {
+      background: linear-gradient(135deg, #f9fafb, #e0f2fe, #f9fafb);
+      background-size: 300% 300%;
+      animation: gradientMove 12s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ✨ Reveal animation */ 
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 🎞️ Stagger animation */
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-stagger.active > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-stagger.active > *:nth-child(1) { transition-delay: 0.1s; }
+    .reveal-stagger.active > *:nth-child(2) { transition-delay: 0.2s; }
+    .reveal-stagger.active > *:nth-child(3) { transition-delay: 0.3s; }
+
+    /* 🌤️ Floating hero image */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .float { animation: float 5s ease-in-out infinite; }
+
+    /* 🔘 Button Glow */
+    .glow-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .glow-btn::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .glow-btn:hover::before {
+      opacity: 1;
+      animation: rotateGlow 3s linear infinite;
+    }
+    @keyframes rotateGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* 🪄 Card hover with depth */
+    .card {
+      transition: all 0.4s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 25px rgba(59,130,246,0.15);
+    }
+
+    /* 🧊 Parallax hero container */
+    .parallax {
+      background: url('hero-bg.jpg') center/cover fixed;
+      position: relative;
+    }
+
+    /* 🧭 Navbar transition */
+    .nav-active {
+      background-color: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+      padding: 0.75rem 1rem !important;
+      transition: all 0.3s ease;
+    }
+
+    /* ⚙️ Slow spin utility */
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spin-slow 10s linear infinite;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-gray-800">
+
+  <!-- Header -->
+  <header id="navbar" class="bg-white shadow p-5 flex justify-between items-center sticky top-0 z-20 transition-all duration-500">
+    <div class="flex items-center space-x-3">
+      <img src="logo.png" alt="Afya Link Logo" class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-2xl border border-gray-200 shadow-sm">
+      <div class="text-2xl font-bold text-blue-700">Afya Link</div>
+    </div>
+    <nav class="space-x-4 text-base font-medium">
+      <a href="signup.html" class="text-blue-500 hover:text-blue-700 transition">Sign Up</a>
+      <a href="login.html" class="text-blue-500 hover:text-blue-700 transition">Login</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="max-w-6xl mx-auto px-6 py-24 flex flex-col md:flex-row items-center justify-between reveal">
+    <div class="md:w-1/2 flex flex-col justify-center items-start space-y-6">
+      <h1 class="text-5xl font-extrabold leading-tight text-gray-900">
+        Quick Health Guidance <br><span class="text-blue-600">at Your Fingertips</span>
+      </h1>
+      <p class="text-gray-700 text-lg">
+        Afya Link helps you understand your symptoms and get AI-guided remedies safely before consulting a doctor.
+      </p>
+      <a href="signup.html" class="glow-btn bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:scale-105 transition-transform duration-300">
+        Get Started
+      </a>
+    </div>
+    <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center">
+      <img src="logo.png" alt="Afya Link Logo" class="float w-64 h-64 md:w-80 md:h-80 object-contain rounded-3xl shadow-xl border border-gray-200">
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-8 reveal-stagger">
+    <div class="card bg-white p-8 rounded-xl shadow text-center">
+      <i class="fas fa-head-side-cough text-blue-500 text-4xl mb-3 animate-bounce"></i>
+      <h3 class="font-bold text-xl mb-2">Offline Symptom Checker</h3>
+      <p class="text-gray-600">Check common symptoms quickly, even without internet.</p>
+    </div>
+    <div class="card bg-white p-8 rounded-xl shadow text-center">
+      <i class="fas fa-notes-medical text-green-500 text-4xl mb-3 animate-pulse"></i>
+      <h3 class="font-bold text-xl mb-2">AI Remedies & Advice</h3>
+      <p class="text-gray-600">Receive personalized home remedies and guidance safely.</p>
+    </div>
+    <div class="card bg-white p-8 rounded-xl shadow text-center">
+      <i class="fas fa-history text-purple-500 text-4xl mb-3 animate-spin-slow"></i>
+      <h3 class="font-bold text-xl mb-2">Health History</h3>
+      <p class="text-gray-600">Track past symptoms and remedies over time.</p>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="max-w-6xl mx-auto px-6 py-16 text-center space-y-12 reveal-stagger">
+    <h2 class="text-4xl font-extrabold text-gray-800">How It Works</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="card bg-white p-6 rounded-xl shadow">
+        <i class="fas fa-keyboard text-blue-500 text-4xl mb-2"></i>
+        <h3 class="font-bold text-lg mb-2">1. Enter Symptoms</h3>
+        <p class="text-gray-600">Input what you’re feeling in a simple form.</p>
+      </div>
+      <div class="card bg-white p-6 rounded-xl shadow">
+        <i class="fas fa-robot text-green-500 text-4xl mb-2"></i>
+        <h3 class="font-bold text-lg mb-2">2. Get AI Guidance</h3>
+        <p class="text-gray-600">Receive AI-generated remedies instantly.</p>
+      </div>
+      <div class="card bg-white p-6 rounded-xl shadow">
+        <i class="fas fa-check-circle text-red-500 text-4xl mb-2"></i>
+        <h3 class="font-bold text-lg mb-2">3. Take Action</h3>
+        <p class="text-gray-600">Follow safe advice and track your health history.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Caution -->
+  <section class="max-w-4xl mx-auto px-6 py-12 text-center reveal">
+    <i class="fas fa-exclamation-triangle text-yellow-500 text-4xl mb-3 animate-pulse"></i>
+    <p class="text-gray-700 italic">⚠️ AI guidance is for informational purposes only and does not replace consultation with a healthcare professional.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white text-center text-gray-500 p-6 border-t border-gray-200">
+    &copy; 2025 Afya Link. All rights reserved. | 
+    <a href="about.html" class="text-blue-500 hover:text-blue-700">About</a> | 
+    <a href="privacy.html" class="text-blue-500 hover:text-blue-700">Privacy</a>
+  </footer>
+
+  <script>
+    // 🌠 Scroll reveal animation
+    const reveals = document.querySelectorAll('.reveal, .reveal-stagger');
+    const revealOnScroll = () => {
+      const windowHeight = window.innerHeight;
+      reveals.forEach(el => {
+        const revealTop = el.getBoundingClientRect().top;
+        if (revealTop < windowHeight - 100) el.classList.add('active');
+      });
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+
+    // 🧭 Navbar shrink on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) navbar.classList.add('nav-active');
+      else navbar.classList.remove('nav-active');
+    });
+  </script>
+
+</body>
+</html>

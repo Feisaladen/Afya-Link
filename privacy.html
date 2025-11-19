@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Afya Link - Privacy Policy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Fade-in and slide animations */
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Background floating gradient */
+    .animated-bg {
+      background: radial-gradient(circle at top left, #e0f2fe, #f8fafc);
+      animation: gradientShift 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    /* Link hover animation */
+    .hover-underline {
+      position: relative;
+    }
+    .hover-underline::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0%;
+      height: 2px;
+      background-color: #3b82f6;
+      transition: width 0.3s ease;
+    }
+    .hover-underline:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="animated-bg font-sans min-h-screen flex flex-col text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-white/80 backdrop-blur-md shadow-sm p-4 flex justify-between items-center sticky top-0 z-10 animate-[fadeIn_1s_ease]">
+    <span class="text-2xl font-bold text-gray-900">Privacy Policy</span>
+    <a href="dashboard.html" class="text-blue-600 hover:text-blue-800 font-medium hover-underline">Back</a>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow p-8 max-w-3xl mx-auto bg-white/90 backdrop-blur-lg shadow-lg rounded-2xl mt-8 space-y-5 animate-[fadeInUp_1s_ease]">
+    <p><strong>At Afya Link</strong>, your privacy is our priority. We are dedicated to safeguarding your personal information and ensuring transparency in how it’s used.</p>
+    
+    <p>Any information you provide, such as your <strong>email</strong> or <strong>symptom data</strong>, is securely stored and used solely to improve your experience. Your data helps us enhance Afya Link’s reliability and provide personalized health insights — nothing more.</p>
+    
+    <p>We stand firmly <strong>against misuse of user data</strong>. Afya Link will never sell, rent, or trade your information to advertisers or third parties. Your trust is the foundation of our platform.</p>
+
+    <p>All user data is protected using industry-standard encryption and stored securely on verified servers. Only authorized systems can access it, and only to deliver the services you’ve requested.</p>
+
+    <p>By using Afya Link, you agree to these principles and acknowledge that your data will be handled responsibly in accordance with this Privacy Policy.</p>
+
+    <div class="pt-4">
+      <a href="about.html" class="text-blue-600 font-semibold hover:text-blue-800 hover-underline transition duration-300">← Back to About</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-12 text-center text-gray-500 p-6 animate-[fadeIn_1.2s_ease]">
+    &copy; 2025 <span class="font-semibold text-gray-700">Afya Link</span>. All rights reserved.
+  </footer>
+</body>
+</html>

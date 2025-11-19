@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Afya Link - Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  window.__AFYA_API_BASE_URL = "https://afya-link-6.onrender.com";
+</script>
+<style>
+  textarea { resize: none; }
+  .hidden { display: none; }
+</style>
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+
+<!-- Navbar -->
+<header class="bg-white shadow-md p-4 flex justify-between items-center sticky top-0 z-10">
+  <div class="flex items-center gap-2">
+    <img src="logo.png" alt="Afya Link Logo" class="w-10 h-10 rounded-xl shadow-sm border border-gray-200">
+    <span class="text-2xl font-bold text-gray-800">Afya Link</span>
+  </div>
+  <nav class="space-x-4">
+    <a href="about.html" class="text-blue-500 hover:text-blue-700 font-medium">About</a>
+    <a href="privacy.html" class="text-green-500 hover:text-green-700 font-medium">Privacy</a>
+    <a id="logoutLink" href="login.html" class="text-red-500 hover:text-red-700 font-medium">Logout</a>
+  </nav>
+</header>
+
+<main class="flex-grow p-6 max-w-4xl mx-auto">
+
+  <!-- Symptom Input -->
+  <section class="bg-white p-6 rounded-2xl shadow-md mb-6">
+    <h1 class="text-3xl font-bold mb-2 text-gray-800">How are you feeling today?</h1>
+    <textarea id="symptomInput" rows="2" placeholder="Enter your symptom..." class="w-full p-4 rounded-lg border border-gray-300 mb-4"></textarea>
+    <div class="flex gap-4">
+      <button id="checkSymptomBtn" class="flex-1 bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 font-medium transition">
+        <i class="fas fa-stethoscope mr-2"></i>Check Offline
+      </button>
+      <button id="getAIAdviceBtn" class="flex-1 bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 font-medium transition">
+        <i class="fas fa-brain mr-2"></i>Get AI Advice
+      </button>
+    </div>
+    <p id="aiStatus" class="text-sm text-blue-600 mt-2 text-center hidden"></p>
+    <p class="text-xs text-gray-400 mt-2 italic text-center">
+      ⚠️ AI guidance is for informational purposes and does not replace a doctor’s consultation.
+    </p>
+  </section>
+
+  <!-- Results -->
+  <section id="resultsSection" class="bg-white p-6 rounded-2xl shadow-md mb-6 hidden space-y-4">
+    <div>
+      <h2 class="text-xl font-semibold mb-2">Symptom Result</h2>
+      <p class="text-gray-700"><strong>Symptom:</strong> <span id="resultSymptom"></span></p>
+      <p class="text-gray-700"><strong>Description:</strong></p>
+      <p id="resultDescription" class="text-gray-600 mt-1"></p>
+    </div>
+    <div>
+      <p class="text-gray-700 font-semibold">Causes</p>
+      <ul id="resultCauses"
+          class="list-disc pl-5 text-gray-600 space-y-1 marker:text-blue-500"></ul>
+    </div>
+    <div>
+      <p class="text-gray-700 font-semibold">Recommended Remedies</p>
+      <ul id="resultRemedies"
+          class="list-disc pl-5 text-gray-600 space-y-1 marker:text-green-500"></ul>
+    </div>
+  </section>
+
+  <!-- History Button -->
+  <section class="mb-6">
+    <button id="viewHistoryBtn" class="w-full bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600 font-medium transition">
+      <i class="fas fa-history mr-2"></i>View Health History
+    </button>
+  </section>
+
+  <!-- History Modal -->
+  <div id="historyModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center hidden z-20">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 relative">
+      <button onclick="closeHistory()" class="absolute top-3 right-3 text-gray-400 hover:text-red-500">
+        <i class="fas fa-times text-lg"></i>
+      </button>
+      <h3 class="text-xl font-bold text-gray-800 mb-4">Past Interactions</h3>
+      <div id="historyList" class="space-y-3 max-h-64 overflow-y-auto"></div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="bg-white text-center text-gray-500 p-4 border-t border-gray-200">
+  &copy; 2025 Afya Link. All rights reserved.
+</footer>
+
+<script>
+// -------------------- Supabase Setup --------------------
+const SUPABASE_URL = "https://lcwmhgdyuumhmsptiaav.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjd21oZ2R5dXVtaG1zcHRpYWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAwNDYzMzEsImV4cCI6MjA3NTYyMjMzMX0.wUkCBYKeHD7zbPoWFSvMV-vFgFOWUFcAistNdWBGBhw";
+
+if (!window.supabase || !window.supabase.createClient) {
+  throw new Error("Supabase JS library failed to load. Check the CDN script tag.");
+}
+
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const API_BASE_URL = window.__AFYA_API_BASE_URL || "http://localhost:5000";
+
+// -------------------- Elements --------------------
+const symptomInput = document.getElementById('symptomInput');
+const resultsSection = document.getElementById('resultsSection');
+const resultSymptom = document.getElementById('resultSymptom');
+const resultDescription = document.getElementById('resultDescription');
+const resultCauses = document.getElementById('resultCauses');
+const resultRemedies = document.getElementById('resultRemedies');
+
+const checkSymptomBtn = document.getElementById('checkSymptomBtn');
+const getAIAdviceBtn = document.getElementById('getAIAdviceBtn');
+const aiStatus = document.getElementById('aiStatus');
+const viewHistoryBtn = document.getElementById('viewHistoryBtn');
+const historyModal = document.getElementById('historyModal');
+const historyList = document.getElementById('historyList');
+
+// -------------------- Offline Symptoms --------------------
+let offlineSymptoms = [
+  { symptom: "headache", description: "Pain in the head", causes: ["dehydration", "stress"], remedies: ["drink water", "rest"] },
+  { symptom: "cough", description: "Coughing", causes: ["cold", "allergy"], remedies: ["honey", "warm fluids"] }
+];
+
+// -------------------- Auth Check --------------------
+async function checkAuth() {
+  const { data } = await supabaseClient.auth.getSession();
+  if (!data.session) {
+    window.location.href = 'login.html';
+    return null;
+  }
+  return data.session.user.email;
+}
+
+// -------------------- Result Rendering Helpers --------------------
+function populateList(element, value, fallbackText) {
+  element.innerHTML = '';
+  const values = Array.isArray(value) ? value : value ? [value] : [];
+
+  if (!values.length) {
+    const li = document.createElement('li');
+    li.textContent = fallbackText;
+    element.appendChild(li);
+    return;
+  }
+
+  values.forEach(item => {
+    if (!item) return;
+    const li = document.createElement('li');
+    li.textContent = item;
+    element.appendChild(li);
+  });
+}
+
+function showResult(symptom, description, causes, remedies) {
+  resultSymptom.textContent = symptom;
+  resultDescription.textContent = description || "No description provided.";
+  populateList(resultCauses, causes, "No causes provided.");
+  populateList(resultRemedies, remedies, "No remedies provided.");
+  resultsSection.classList.remove('hidden');
+}
+
+function tryExtractAdvice(description) {
+  if (typeof description !== "string") return null;
+  let cleaned = description.replace(/```json/gi, "```").replace(/```/g, "").trim();
+  const start = cleaned.indexOf("{");
+  const end = cleaned.lastIndexOf("}");
+  if (start === -1 || end === -1) return null;
+  const candidate = cleaned.slice(start, end + 1);
+  try {
+    const parsed = JSON.parse(candidate);
+    return {
+      description: parsed.description || "",
+      causes: parsed.causes,
+      remedies: parsed.remedies,
+    };
+  } catch (err) {
+    console.warn("Failed to extract structured advice from description", err);
+    return null;
+  }
+}
+
+function normalizeAdvicePayload(payload = {}) {
+  let { description, causes, remedies } = payload;
+  const extracted = tryExtractAdvice(description);
+  if (extracted) {
+    description = extracted.description || description;
+    if (!causes || (Array.isArray(causes) && !causes.length)) {
+      causes = extracted.causes;
+    }
+    if (!remedies || (Array.isArray(remedies) && !remedies.length)) {
+      remedies = extracted.remedies;
+    }
+  }
+  return { description, causes, remedies };
+}
+
+// -------------------- Save History --------------------
+async function saveHistory(email, symptom, description, causes, remedies, source) {
+  try {
+    await supabaseClient.from('history').insert({
+      email,
+      symptom,
+      description,
+      causes: JSON.stringify(causes),
+      remedies: JSON.stringify(remedies),
+      source,
+      created_at: new Date().toISOString()
+    });
+  } catch (err) {
+    console.error("Failed to save history:", err);
+  }
+}
+
+// -------------------- Offline Symptom Check --------------------
+checkSymptomBtn.addEventListener('click', async () => {
+  const email = await checkAuth();
+  if (!email) return;
+
+  const input = symptomInput.value.trim().toLowerCase();
+  if (!input) return alert("Please enter a symptom");
+
+  const found = offlineSymptoms.find(s => input.includes(s.symptom));
+  if (found) {
+    showResult(found.symptom, found.description, found.causes, found.remedies);
+    await saveHistory(email, found.symptom, found.description, found.causes, found.remedies, "offline");
+  } else {
+    showResult(input, "Please enter a correct symptom for accurate guidance", "-", "Try AI Advice or consult a doctor");
+    await saveHistory(email, input, "Not found offline", "-", "Try AI Advice or consult a doctor", "offline");
+  }
+});
+
+// -------------------- AI Advice --------------------
+getAIAdviceBtn.addEventListener('click', async () => {
+  const email = await checkAuth();
+  if (!email) return;
+
+  const symptom = symptomInput.value.trim();
+  if (!symptom) return alert("Please enter a symptom");
+
+  const originalLabel = getAIAdviceBtn.innerHTML;
+  getAIAdviceBtn.disabled = true;
+  getAIAdviceBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Getting advice...';
+  aiStatus.textContent = "Talking to Gemini for tailored guidance...";
+  aiStatus.classList.remove('hidden', 'text-red-500');
+  aiStatus.classList.add('text-blue-600');
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/ai_advice`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ symptom, email })
+    });
+    const data = await response.json();
+
+    if (data.error) return alert(data.error);
+
+    const normalized = normalizeAdvicePayload(data.result);
+    showResult(symptom, normalized.description, normalized.causes, normalized.remedies);
+    await saveHistory(email, symptom, normalized.description, normalized.causes, normalized.remedies, "ai");
+    aiStatus.textContent = "Advice ready! Scroll down to review the details.";
+  } catch (err) {
+    console.error("AI advice error:", err);
+    aiStatus.textContent = "Failed to get AI advice. Please try again.";
+    aiStatus.classList.remove('text-blue-600');
+    aiStatus.classList.add('text-red-500');
+  } finally {
+    getAIAdviceBtn.disabled = false;
+    getAIAdviceBtn.innerHTML = originalLabel;
+    setTimeout(() => aiStatus.classList.add('hidden'), 2500);
+  }
+});
+
+// -------------------- History --------------------
+function openHistory() {
+  historyModal.classList.remove('hidden');
+}
+function closeHistory() {
+  historyModal.classList.add('hidden');
+}
+window.closeHistory = closeHistory;
+
+viewHistoryBtn.addEventListener('click', async () => {
+  const email = await checkAuth();
+  if (!email) return;
+
+  historyList.innerHTML = '';
+  try {
+    const response = await fetch(`${API_BASE_URL}/history/${encodeURIComponent(email)}`);
+    const payload = await response.json();
+    if (!response.ok || payload.error) {
+      throw new Error(payload.error || "Failed to fetch history");
+    }
+
+    const entries = payload.history || [];
+
+    if (entries.length === 0) {
+      const emptyState = document.createElement('div');
+      emptyState.className = "p-3 text-center text-gray-500";
+      emptyState.textContent = "No history yet. Run an offline check or AI advice to populate this list.";
+      historyList.appendChild(emptyState);
+    } else {
+      entries.forEach(h => {
+      const item = document.createElement('div');
+      item.className = "p-3 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200";
+        item.textContent = `${h.source === "ai" ? "AI Advice" : "Offline"}: ${h.symptom}`;
+        let parsedCauses = h.causes;
+        let parsedRemedies = h.remedies;
+        try {
+          if (typeof h.causes === "string") parsedCauses = JSON.parse(h.causes);
+        } catch (parseErr) {
+          console.warn("Failed to parse causes JSON", parseErr);
+        }
+        try {
+          if (typeof h.remedies === "string") parsedRemedies = JSON.parse(h.remedies);
+        } catch (parseErr) {
+          console.warn("Failed to parse remedies JSON", parseErr);
+        }
+        const normalizedHistory = normalizeAdvicePayload({
+          description: h.description,
+          causes: parsedCauses,
+          remedies: parsedRemedies
+        });
+        item.onclick = () => showResult(
+          h.symptom,
+          normalizedHistory.description,
+          normalizedHistory.causes,
+          normalizedHistory.remedies
+        );
+      historyList.appendChild(item);
+      });
+    }
+
+    openHistory();
+  } catch (err) {
+    console.error("Fetching history error:", err);
+    alert("Could not fetch history");
+  }
+});
+
+// -------------------- Logout --------------------
+const logoutLink = document.getElementById('logoutLink');
+if (logoutLink) {
+  logoutLink.addEventListener('click', async (event) => {
+    event.preventDefault();
+    try {
+      const { error } = await supabaseClient.auth.signOut();
+      if (error) throw error;
+    } catch (err) {
+      console.warn("Supabase signOut reported an error, continuing anyway:", err);
+    } finally {
+      localStorage.removeItem("supabase_session");
+      localStorage.removeItem("user_email");
+      window.location.href = 'login.html';
+    }
+  });
+}
+
+// -------------------- Initial Auth Check --------------------
+checkAuth();
+</script>
+
+</body>
+</html>
