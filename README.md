@@ -8,8 +8,6 @@ Afya-Link is an intelligent health assistant web application that helps you unde
 
 **[Try Afya-Link Now →](https://afya-link-health.netlify.app/)**
 
-![Afya-Link Banner](https://via.placeholder.com/1200x400/4F46E5/FFFFFF?text=Afya-Link+Health+Assistant)
-
 ## ✨ Features
 
 ### 🔍 Symptom Analysis
