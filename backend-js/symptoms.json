@@ -1,0 +1,262 @@
+{
+  "headache": {
+    "description": "Pain or discomfort in the head or scalp.",
+    "causes": ["Dehydration", "Stress", "Tension", "Eye strain"],
+    "remedies": ["Drink water", "Rest", "Cold or warm compress", "Take short walk"]
+  },
+  "fever": {
+    "description": "Body temperature higher than normal.",
+    "causes": ["Viral infection", "Bacterial infection", "Heat exhaustion"],
+    "remedies": ["Hydrate", "Rest", "Cool compress", "Paracetamol if needed"]
+  },
+  "stomach ache": {
+    "description": "Pain or discomfort in the stomach area.",
+    "causes": ["Indigestion", "Gas or bloating", "Food poisoning", "Stomach infection"],
+    "remedies": ["Drink warm water", "Eat bland foods", "Rest", "Avoid heavy meals"]
+  },
+  "leg sore": {
+    "description": "Pain or discomfort in the legs.",
+    "causes": ["Muscle strain", "Overexertion", "Poor circulation", "Injury"],
+    "remedies": ["Rest", "Stretch gently", "Ice or heat packs", "Elevate legs"]
+  },
+  "cough": {
+    "description": "A sudden expulsion of air from the lungs.",
+    "causes": ["Cold", "Flu", "Allergies", "Respiratory infection"],
+    "remedies": ["Stay hydrated", "Steam inhalation", "Cough syrup", "Rest"]
+  },
+  "sore throat": {
+    "description": "Pain or irritation in the throat.",
+    "causes": ["Cold", "Flu", "Viral infection", "Bacterial infection"],
+    "remedies": ["Warm salt water gargle", "Honey and tea", "Stay hydrated", "Rest"]
+  },
+  "runny nose": {
+    "description": "Excess nasal drainage.",
+    "causes": ["Allergies", "Cold", "Sinus infection"],
+    "remedies": ["Blow nose gently", "Saline spray", "Rest", "Hydrate"]
+  },
+  "fatigue": {
+    "description": "Feeling unusually tired or exhausted.",
+    "causes": ["Lack of sleep", "Stress", "Poor diet", "Illness"],
+    "remedies": ["Rest", "Eat balanced meals", "Hydrate", "Light exercise"]
+  },
+  "nausea": {
+    "description": "Feeling of wanting to vomit.",
+    "causes": ["Food poisoning", "Motion sickness", "Viral infection", "Medication side effect"],
+    "remedies": ["Ginger tea", "Rest", "Eat bland foods", "Stay hydrated"]
+  },
+  "dizziness": {
+    "description": "Feeling lightheaded or unsteady.",
+    "causes": ["Low blood pressure", "Dehydration", "Vertigo", "Medication side effect"],
+    "remedies": ["Sit or lie down", "Hydrate", "Eat small meals", "Avoid sudden movements"]
+  },
+  "muscle pain": {
+    "description": "Pain or soreness in muscles.",
+    "causes": ["Overexertion", "Injury", "Inflammation", "Tension"],
+    "remedies": ["Rest", "Stretch gently", "Ice/heat therapy", "Pain relief creams"]
+  },
+  "back pain": {
+    "description": "Discomfort in the back area.",
+    "causes": ["Poor posture", "Muscle strain", "Injury", "Herniated disc"],
+    "remedies": ["Stretching", "Heat therapy", "Rest", "Pain relief medication if needed"]
+  },
+  "insomnia": {
+    "description": "Difficulty falling or staying asleep.",
+    "causes": ["Stress", "Anxiety", "Caffeine", "Poor sleep environment"],
+    "remedies": ["Maintain sleep routine", "Avoid caffeine", "Relaxation techniques", "Create comfortable environment"]
+  },
+  "constipation": {
+    "description": "Difficulty in bowel movement.",
+    "causes": ["Low fiber diet", "Dehydration", "Lack of exercise", "Medication side effect"],
+    "remedies": ["Increase fiber", "Drink water", "Exercise", "Avoid processed foods"]
+  },
+  "diarrhea": {
+    "description": "Frequent loose or watery stools.",
+    "causes": ["Viral infection", "Food poisoning", "Medication side effect"],
+    "remedies": ["Hydrate", "Eat bland foods", "Probiotics", "Rest"]
+  },
+  "allergic reaction": {
+    "description": "Body reacts to allergens causing rash, swelling or itch.",
+    "causes": ["Food allergy", "Insect sting", "Medication", "Environmental allergens"],
+    "remedies": ["Antihistamines", "Avoid trigger", "Cool compress", "Consult doctor if severe"]
+  },
+  "shortness of breath": {
+    "description": "Difficulty in breathing.",
+    "causes": ["Asthma", "Allergic reaction", "Respiratory infection", "Cardiac issue"],
+    "remedies": ["Sit upright", "Deep slow breaths", "Avoid triggers", "Seek medical attention if severe"]
+  },
+  "chest pain": {
+    "description": "Discomfort or pain in chest area.",
+    "causes": ["Heart attack", "Angina", "Muscle strain", "Acid reflux"],
+    "remedies": ["Rest", "Avoid exertion", "Seek immediate medical attention if severe"]
+  },
+  "rash": {
+    "description": "Visible skin eruption.",
+    "causes": ["Allergy", "Infection", "Irritation", "Autoimmune conditions"],
+    "remedies": ["Avoid irritant", "Apply soothing cream", "Keep area clean", "Consult doctor if persistent"]
+  },
+  "vomiting": {
+    "description": "Forceful expulsion of stomach contents.",
+    "causes": ["Food poisoning", "Infection", "Motion sickness", "Medication side effect"],
+    "remedies": ["Rest", "Hydrate", "Eat bland foods", "Avoid strong smells"]
+  },
+  "cold": {
+    "description": "Common viral infection with sneezing and congestion.",
+    "causes": ["Rhinovirus", "Exposure to cold", "Weakened immunity"],
+    "remedies": ["Rest", "Hydrate", "Warm fluids", "Over-the-counter meds if necessary"]
+  },
+  "flu": {
+    "description": "Influenza virus infection with fever, chills, and body aches.",
+    "causes": ["Influenza virus", "Weak immunity", "Close contact with infected person"],
+    "remedies": ["Rest", "Hydrate", "Fever control", "Consult doctor if severe"]
+  },
+  "ear pain": {
+    "description": "Discomfort in the ear.",
+    "causes": ["Infection", "Earwax blockage", "Pressure changes", "Injury"],
+    "remedies": ["Warm compress", "Ear drops if recommended", "Avoid inserting objects", "Consult doctor if severe"]
+  },
+  "eye irritation": {
+    "description": "Redness, itching, or discomfort in eyes.",
+    "causes": ["Allergy", "Dry eyes", "Infection", "Foreign object"],
+    "remedies": ["Rinse eyes", "Avoid rubbing", "Use eye drops", "Consult doctor if severe"]
+  },
+  "nosebleed": {
+    "description": "Bleeding from the nose.",
+    "causes": ["Dry air", "Injury", "Allergy", "Nasal infection"],
+    "remedies": ["Pinch nose", "Lean forward", "Apply ice", "Seek medical help if persistent"]
+  },
+  "hair loss": {
+    "description": "Loss of hair from scalp or body.",
+    "causes": ["Genetics", "Stress", "Hormonal changes", "Nutritional deficiency"],
+    "remedies": ["Maintain diet", "Reduce stress", "Use mild hair products", "Consult doctor if severe"]
+  },
+  "anxiety": {
+    "description": "Feeling of worry, nervousness, or unease.",
+    "causes": ["Stress", "Personal issues", "Health conditions", "Caffeine"],
+    "remedies": ["Deep breathing", "Meditation", "Exercise", "Seek counseling if persistent"]
+  },
+  "depression": {
+    "description": "Persistent low mood and loss of interest.",
+    "causes": ["Genetic factors", "Stress", "Trauma", "Hormonal imbalance"],
+    "remedies": ["Counseling", "Regular exercise", "Healthy diet", "Seek medical help"]
+  },
+  "insomnia": {
+    "description": "Difficulty in sleeping.",
+    "causes": ["Stress", "Anxiety", "Caffeine", "Environment"],
+    "remedies": ["Maintain sleep schedule", "Avoid caffeine late", "Relaxation techniques", "Create comfortable environment"]
+  },
+  "joint pain": {
+    "description": "Pain in joints.",
+    "causes": ["Arthritis", "Injury", "Overuse", "Inflammation"],
+    "remedies": ["Rest", "Gentle movement", "Ice/heat therapy", "Pain relief creams"]
+  },
+  "cold sores": {
+    "description": "Blisters on lips or around mouth.",
+    "causes": ["HSV-1 virus", "Stress", "Sun exposure", "Weakened immunity"],
+    "remedies": ["Antiviral creams", "Avoid touching", "Keep area clean", "Consult doctor if severe"]
+  },
+  "toothache": {
+    "description": "Pain in teeth or gums.",
+    "causes": ["Cavities", "Gum infection", "Tooth injury", "Grinding teeth"],
+    "remedies": ["Warm salt water rinse", "Pain relief meds", "Visit dentist", "Avoid hard foods"]
+  },
+  "bloody stools": {
+    "description": "Presence of blood in stool.",
+    "causes": ["Hemorrhoids", "Infection", "Gastrointestinal bleeding"],
+    "remedies": ["Consult doctor immediately", "Hydrate", "Eat fiber-rich foods"]
+  },
+  "urinary pain": {
+    "description": "Painful urination.",
+    "causes": ["UTI", "Kidney stones", "Bladder infection"],
+    "remedies": ["Hydrate", "Consult doctor", "Avoid irritants like caffeine"]
+  },
+  "nose congestion": {
+    "description": "Blocked nasal passages.",
+    "causes": ["Cold", "Allergy", "Sinus infection"],
+    "remedies": ["Steam inhalation", "Saline spray", "Rest", "Hydrate"]
+  },
+  "sweating": {
+    "description": "Excessive perspiration.",
+    "causes": ["Heat", "Stress", "Fever", "Hyperhidrosis"],
+    "remedies": ["Stay hydrated", "Wear breathable clothes", "Cool environment"]
+  },
+  "chills": {
+    "description": "Feeling cold with shivering.",
+    "causes": ["Fever", "Infection", "Hypothermia"],
+    "remedies": ["Warm clothes", "Warm drinks", "Rest", "Seek medical attention if persistent"]
+  },
+  "palpitations": {
+    "description": "Awareness of heart beating irregularly or fast.",
+    "causes": ["Stress", "Caffeine", "Heart conditions", "Medication"],
+    "remedies": ["Rest", "Reduce caffeine", "Relaxation", "Consult doctor if severe"]
+  },
+  "blurred vision": {
+    "description": "Unclear or fuzzy vision.",
+    "causes": ["Eye strain", "Diabetes", "Glaucoma", "Migraine"],
+    "remedies": ["Rest eyes", "Visit eye doctor", "Reduce screen time", "Corrective lenses"]
+  },
+  "tingling": {
+    "description": "Pins and needles sensation.",
+    "causes": ["Nerve compression", "Poor circulation", "Vitamin deficiency"],
+    "remedies": ["Stretch", "Massage", "Check nutrition", "Consult doctor if persistent"]
+  },
+  "numbness": {
+    "description": "Loss of sensation in body part.",
+    "causes": ["Nerve injury", "Poor circulation", "Diabetes"],
+    "remedies": ["Rest", "Gentle movement", "Consult doctor if persistent"]
+  },
+  "swelling": {
+    "description": "Inflammation or puffiness in body part.",
+    "causes": ["Injury", "Allergy", "Infection", "Fluid retention"],
+    "remedies": ["Elevate", "Ice packs", "Rest", "Consult doctor if severe"]
+  },
+  "weight loss": {
+    "description": "Unintentional reduction in body weight.",
+    "causes": ["Diet changes", "Thyroid issues", "Diabetes", "Cancer"],
+    "remedies": ["Eat balanced diet", "Consult doctor", "Track progress", "Hydrate"]
+  },
+  "weight gain": {
+    "description": "Increase in body weight.",
+    "causes": ["Diet", "Hormonal issues", "Lack of exercise", "Medications"],
+    "remedies": ["Exercise regularly", "Balanced diet", "Consult doctor if sudden"]
+  },
+  "heartburn": {
+    "description": "Burning sensation in chest or throat.",
+    "causes": ["Acid reflux", "Overeating", "Spicy foods", "Pregnancy"],
+    "remedies": ["Avoid trigger foods", "Eat smaller meals", "Antacids", "Stay upright after eating"]
+  },
+  "bloating": {
+    "description": "Swelling in abdomen causing discomfort.",
+    "causes": ["Gas", "Overeating", "Digestive disorders", "Constipation"],
+    "remedies": ["Avoid gas-producing foods", "Gentle exercise", "Stay hydrated"]
+  },
+  "cramps": {
+    "description": "Sudden, involuntary muscle contractions.",
+    "causes": ["Dehydration", "Overuse", "Electrolyte imbalance"],
+    "remedies": ["Stretching", "Hydrate", "Heat packs", "Massage"]
+  },
+  "cold feet": {
+    "description": "Feet feel unusually cold.",
+    "causes": ["Poor circulation", "Cold environment", "Hypothyroidism"],
+    "remedies": ["Warm socks", "Foot bath", "Move legs", "Consult doctor if persistent"]
+  },
+  "cold hands": {
+    "description": "Hands feel unusually cold.",
+    "causes": ["Poor circulation", "Cold environment", "Anemia"],
+    "remedies": ["Warm gloves", "Hand exercises", "Hydrate", "Consult doctor if persistent"]
+  },
+  "leg cramps": {
+    "description": "Painful muscle contractions in legs.",
+    "causes": ["Overuse", "Electrolyte imbalance", "Dehydration", "Poor circulation"],
+    "remedies": ["Stretching", "Hydrate", "Massage", "Warm compress"]
+  },
+  "swollen ankles": {
+    "description": "Puffiness around ankles.",
+    "causes": ["Injury", "Poor circulation", "Fluid retention", "Heart/kidney issues"],
+    "remedies": ["Elevate legs", "Compression socks", "Exercise", "Consult doctor if persistent"]
+  },
+  "nail changes": {
+    "description": "Discoloration, brittleness or texture changes in nails.",
+    "causes": ["Fungal infection", "Vitamin deficiency", "Trauma", "Systemic illness"],
+    "remedies": ["Maintain hygiene", "Apply antifungal if needed", "Diet rich in vitamins", "Consult doctor if persistent"]
+  }
+}
