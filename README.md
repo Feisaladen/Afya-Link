@@ -103,33 +103,21 @@ npm start
 ## 📦 Project Structure
 
 ```
-afya-link/
-├── public/
-│   ├── index.html
-│   ├── css/
-│   │   └── styles.css
-│   ├── js/
-│   │   ├── app.js
-│   │   ├── auth.js
-│   │   ├── symptoms.js
-│   │   └── offline.js
-│   └── sw.js (Service Worker)
-├── server/
-│   ├── index.js
-│   ├── routes/
-│   │   ├── auth.js
-│   │   ├── symptoms.js
-│   │   └── ai.js
-│   ├── middleware/
-│   │   └── auth.js
-│   └── services/
-│       ├── gemini.js
-│       └── supabase.js
-├── .env
-├── .gitignore
-├── package.json
-└── README.md
-```
+backend-js/               # Backend logic (JavaScript)
+  └── ...                # Contains server files, routes, configs
+
+.env                     # Environment variables (sensitive keys removed)
+README.md                # Project documentation
+about.html               # About page
+dashboard.html           # User dashboard
+index.html               # Landing page
+login.html               # Login page
+logo.png                 # Project logo
+privacy.html             # Privacy policy page
+script.js                # Frontend JavaScript
+sign-up-legacy.html      # Old signup version
+signup.html              # New signup page
+
 
 ## 📱 Usage
 
